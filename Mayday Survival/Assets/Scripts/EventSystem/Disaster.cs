@@ -12,6 +12,8 @@ public class Disaster : Event
     public enum DisasterType { dmgReward, delayRescue }
     public DisasterType disasterType;
 
+    public List<Reward> rewards;
+
     public override bool TryEvent()
     {
         return base.TryEvent();
@@ -28,12 +30,17 @@ public class Disaster : Event
                 EventManager.instance.DelayRescue(damage);
                 break;
         }
+        for (int i = 0; i < rewards.Count; i++)
+        {
+            rewards[i].Activate();
+            EventManager.instance.FinishEvent(this);
+        }
         base.PlayEvent();
         disasterStamp = Time.time;
     }
     public override void FinishEvent()
     {
-        base.FinishEvent();
+        base.FinishEvent();  
         Debug.Log("Disaster over!");
     }
 

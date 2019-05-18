@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour
 
     public List<Event> allEvents;
     public List<Event> finishedEvents;
+
     public List<BuildReward> rewards;
 
     public struct ActiveEvent
@@ -194,6 +195,14 @@ public class EventManager : MonoBehaviour
     /// <param name="deck">The new deck</param>
     public void AddDeck(EventDeck deck)
     {
+        for (int i = 0; i < deck.missions.Count; i++)
+        {
+            deck.events.Add(deck.missions[i]);
+        }
+        for (int i = 0; i < deck.disaster.Count; i++)
+        {
+            deck.events.Add(deck.disaster[i]);
+        }
         foreach (Event e in deck.events)
         {
             allEvents.Add(e);
