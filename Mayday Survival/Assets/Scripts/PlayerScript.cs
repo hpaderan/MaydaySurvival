@@ -44,7 +44,8 @@ public class PlayerScript : MonoBehaviour
         {
             moveVals = moveVals.normalized * moveSpeed * Time.deltaTime;
             rbody.MovePosition(transform.position + moveVals);
-            transform.forward = moveVals.normalized;
+            if (moveVals.normalized != Vector3.zero)
+                transform.forward = moveVals.normalized;
         }
     }
 
