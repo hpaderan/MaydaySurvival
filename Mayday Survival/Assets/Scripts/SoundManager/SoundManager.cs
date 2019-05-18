@@ -5,13 +5,25 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    
+    public static SoundManager instance = null;
+
     public bool isNight;
     public float fadeTime;
     private float fadeT;
     public Sound[] sounds;
     public DualTheme music;
-    private void Awake()
+    #region singleton
+    void Awake()
     {
+        //Check if instance already exists
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+        #endregion
+
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -27,6 +39,8 @@ public class SoundManager : MonoBehaviour
 
         fadeT = 0;
     }
+    
+
     private void SetUpMusic()
     {
         music.source = gameObject.AddComponent<AudioSource>();
@@ -55,7 +69,7 @@ public class SoundManager : MonoBehaviour
     }
     private void HandleMusic()
     {
-        
+
         HandleFade();
 
         //Volumes are always opposite
@@ -107,6 +121,12 @@ public class SoundManager : MonoBehaviour
         else
         {
             s.source.Play();
-        }    
+        }
+    }
+
+    public void Play(string name, float delay)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.PlayDelayed(s.delay + delay);
     }
 }
