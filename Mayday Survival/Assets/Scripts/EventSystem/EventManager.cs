@@ -17,7 +17,7 @@ public class EventManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
-
+    public int activeNum = 3;
     public List<Event> allEvents;
     public List<Event> finishedEvents;
 
@@ -180,13 +180,17 @@ public class EventManager : MonoBehaviour
             while (activeEvents.Count < 1);
         }
         //Check for timed out active events
-        for (int i = 0; i < activeEvents.Count; i++)
+        if (activeEvents.Count > 0)
         {
-            if (Time.time - activeEvents[i].timeStamp >= eventWait && activeEvents[i].aEvent == null)
+            for (int i = 0; i < activeEvents.Count; i++)
             {
-                activeEvents[i] = new ActiveEvent { aEvent = DrawNewEvent() };
+                if (Time.time - activeEvents[i].timeStamp >= eventWait && activeEvents[i].aEvent == null)
+                {
+                    activeEvents[i] = new ActiveEvent { aEvent = DrawNewEvent() };
+                }
             }
         }
+        
         
     }
     /// <summary>
