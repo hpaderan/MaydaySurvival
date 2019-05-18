@@ -1,15 +1,10 @@
-﻿Shader "Custom/ToonOutline"
+﻿Shader "Custom/ToonGround"
 {
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
 		_AlbedoColor("Albedo Color Adjust", Color) = (1,1,1,1)
-		_OutlineColor("Outline Color", Color) = (1,0,0,1)
-		_Outline("Outline Width", float) = 2
 		_RampTex("Ramp Texture", 2D) = "white" {}
-		_EmissiveTex("Texture", 2D) = "black" {}
-		_EmissiveColor("Emissive Color", Color) = (1,1,1,1)
-		[PerRendererData]_OutlineMultiplication("Multiply Outline", float) = 0
 	}
 		SubShader
 		{
@@ -54,46 +49,6 @@
 			}
 			ENDCG
 			//Texture end
-
-			//Outline start
-			Pass
-			{
-				Tags{"Queue" = "Transparent"}
-				Cull Front
-
-				CGPROGRAM
-				#pragma vertex vert
-				#pragma fragment frag
-
-				#include "UnityCG.cginc"
-
-				struct v2f
-				{
-				float4 pos : SV_POSITION;
-				};
-
-				float _Outline;
-				float4 _OutlineColor;
-				float _OutlineMultiplication;
-
-				v2f vert(appdata_base v)
-				{
-					v2f o;
-						v.vertex.xyz += normalize(v.vertex.xyz) * _Outline;
-						v.normal *= -1;
-						o.pos = UnityObjectToClipPos(v.vertex);
-
-					return o;
-				}
-
-				fixed4 frag(v2f i) : SV_Target
-				{
-					return _OutlineColor * _OutlineMultiplication;
-				}
-				ENDCG
-			}
-			//Outline end
-
 			UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
 		}
 }
