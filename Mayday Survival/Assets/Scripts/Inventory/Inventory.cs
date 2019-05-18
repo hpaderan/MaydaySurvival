@@ -29,7 +29,7 @@ public class Inventory : MonoBehaviour
     public List<Item> items = new List<Item>();
 
     //add items into the inventory
-    public bool ADD (Item item)
+    public bool Add (Item item)
     {
         
             if (items.Count >= space)

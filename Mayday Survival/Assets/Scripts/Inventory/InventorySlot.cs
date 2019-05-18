@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     public Image icon;
+    public Image pointer;
     Item item;
     public Button removeButton;
 
@@ -14,6 +15,7 @@ public class InventorySlot : MonoBehaviour
     public void AddItem(Item newItem)
     {
         item = newItem;
+        icon.sprite = item.icon;
         icon.enabled = true;
         removeButton.interactable = true;
     }
@@ -31,7 +33,6 @@ public class InventorySlot : MonoBehaviour
     public void OnRemoveButton()
     {
         Inventory.instance.Remove(item);
-
     }
 
     public void UseItem()
