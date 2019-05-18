@@ -7,12 +7,14 @@ public class CameraController : MonoBehaviour
     public GameObject player;
     public float camHeight;
     public float camDepth;
+    public float foo;
 
     void Update()
     {
+        transform.LookAt(player.transform);
+
         Vector3 endPosition = player.transform.position + new Vector3(0,camHeight,-camDepth);
-        Vector3 lerpPosition = Vector3.Lerp(transform.position,endPosition,0.1f);
-        transform.position = lerpPosition;
-        //  transform.LookAt(player.transform.position);
+        //transform.position = endPosition;
+        transform.position = Vector3.LerpUnclamped(transform.position, endPosition, foo);
     }
 }
