@@ -71,7 +71,7 @@ public class DayNightCycle : MonoBehaviour
     void UpdateMoon()
     {
         DayNightCycle realSun = transform.parent.GetComponent<DayNightCycle>();
-
+        isNight = realSun.isNight;
         //Volumes are always opposite
         float halfPoint = realSun.sunInitialIntensity / 2f;
         float diff = realSun.timeMultiplier - halfPoint;
