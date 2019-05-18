@@ -13,7 +13,11 @@ public class PlayerScript : MonoBehaviour
     private Vector3 moveVals;
 
     // Pick up
+    private bool isPickingup;
     private GameObject pickupTarg;
+
+    // Use tool
+    private bool isUsingTool;
 
     // References
     public PickupDetector pickupDetector;
@@ -22,6 +26,8 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody>();
+        isPickingup = false;
+        isUsingTool = false;
     }
     
     void Update()
@@ -44,20 +50,28 @@ public class PlayerScript : MonoBehaviour
         moveVals.Set(h,0f,v);
 
         // Action inputs
-        if ( Input.GetKeyUp(KeyCode.F) ) {
+        if ( Input.GetAxis("Interact") > 0.8 && !isPickingup) {
             // do action here
+            Debug.Log("Interacting...");
             StartCoroutine("PickUp");
+        }
+
+        if ( Input.GetAxis("Use") > 0.8 && !isUsingTool)
+        {
+            // do action here
+            Debug.Log("Using...");
         }
     }
 
     IEnumerator PickUp()
     {
+        isPickingup = true;
         if ( pickupDetector.enabled == false )
             pickupDetector.enabled = true;
         
         yield return new WaitForSeconds(0.2f);
 
-        if ( pickupDetector.detected.Count <= 0 )
+        if ( pickupDetector.detected.Count > 0 )
         {
             GameObject closest = pickupDetector.detected[0];
             foreach ( GameObject pickup in pickupDetector.detected )
@@ -70,9 +84,10 @@ public class PlayerScript : MonoBehaviour
             }
         }
         // Ask inventory to place closest in
-        // InventorySingleton.instance.PutIn(closest);
+        // InventorySingleton.in
 
         pickupDetector.enabled = false;
+        isPickingup = false;
     }
 
 
