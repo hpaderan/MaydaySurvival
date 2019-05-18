@@ -41,11 +41,14 @@ public class EventManager : MonoBehaviour
     }
     private void UpdateActive()
     {
-        for (int i = 0; i < activeEvents.Count; i++)
+        if (activeEvents != null)
         {
-            if (activeEvents[i].aEvent != null)
+            for (int i = 0; i < activeEvents.Count; i++)
             {
-                activeEvents[i].aEvent.UpdateEvent();
+                if (activeEvents[i].aEvent != null)
+                {
+                    activeEvents[i].aEvent.UpdateEvent();
+                }
             }
         }
     }
@@ -180,18 +183,19 @@ public class EventManager : MonoBehaviour
             while (activeEvents.Count < 1);
         }
         //Check for timed out active events
-        if (activeEvents.Count > 0)
+        if (activeEvents != null)
         {
-            for (int i = 0; i < activeEvents.Count; i++)
+            if (activeEvents.Count > 0)
             {
-                if (Time.time - activeEvents[i].timeStamp >= eventWait && activeEvents[i].aEvent == null)
+                for (int i = 0; i < activeEvents.Count; i++)
                 {
-                    activeEvents[i] = new ActiveEvent { aEvent = DrawNewEvent() };
+                    if (Time.time - activeEvents[i].timeStamp >= eventWait && activeEvents[i].aEvent == null)
+                    {
+                        activeEvents[i] = new ActiveEvent { aEvent = DrawNewEvent() };
+                    }
                 }
             }
         }
-        
-        
     }
     /// <summary>
     /// Add a new deck to the list of events
