@@ -21,9 +21,16 @@ public class PlayerScript : MonoBehaviour
     private bool isUsingTool;
     public GameObject currentTool;
 
+    // Drop item
+    private bool isDroppingItem;
+
+    // Cycle inventory
+    private bool isCyclingInv;
+
     // References
     public PickupDetector pickupDetector;
     private Rigidbody rbody;
+    //inventory
 
     void Start()
     {
@@ -31,6 +38,8 @@ public class PlayerScript : MonoBehaviour
         isMoveLocked = false;
         isPickingup = false;
         isUsingTool = false;
+        isDroppingItem = false;
+        isCyclingInv = false;
     }
     
     void Update()
@@ -58,9 +67,9 @@ public class PlayerScript : MonoBehaviour
         moveVals.Set(h,0f,v);
 
         // Action inputs
-        if ( Input.GetAxis("Interact") > 0.8 && !isPickingup) {
+        if ( Input.GetAxis("Pickup") > 0.8 && !isPickingup) {
             // do action here
-            Debug.Log("Interacting...");
+            Debug.Log("Picking up...");
             StartCoroutine("PickUp");
         }
 
@@ -74,6 +83,18 @@ public class PlayerScript : MonoBehaviour
 
 
         } else { isMoveLocked = false; }
+
+        if ( Input.GetAxisRaw("Drop") == 1 && !isDroppingItem)
+        {
+            // do action here
+            Debug.Log("Dropping...");
+            StartCoroutine("Drop");
+        }
+
+        if ( Input.GetAxis("CycleInv") != 0 && !isCyclingInv)
+        {
+            StartCoroutine("CycleInv");
+        }
     }
 
     IEnumerator PickUp()
@@ -103,5 +124,28 @@ public class PlayerScript : MonoBehaviour
         isPickingup = false;
     }
 
+    IEnumerator Drop() {
+        isDroppingItem = true;
+        // Inventory.remove(GetItem());
+        // spawn item
+        yield return new WaitForSeconds(0.8f); // short delay to prevent dropping everything
+        isDroppingItem = false;
+    }
 
+    IEnumerator CycleInv()
+    {
+        isCyclingInv = true;
+
+        Debug.Log(Input.GetAxis("CycleInv"));
+        if ( Input.GetAxis("CycleInv") == 1 ) {
+            //currentTool = inventory.getItemToRight; iff itemToRight is a tool. else null
+            Debug.Log("Move inv to right");
+        } else if ( Input.GetAxis("CycleInv") < 0 ) {
+            //currentTool = inventory.getItemToLeft; iff itemToLeft is a tool. else null
+            Debug.Log("Move inv to left");
+        }
+
+        yield return new WaitForSeconds(0.2f);
+        isCyclingInv = false;
+    }
 }
