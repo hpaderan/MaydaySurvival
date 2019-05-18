@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     // Movement
     public float moveSpeed;
     private Vector3 moveVals;
+    private bool isMoveLocked;
 
     // Pick up
     private bool isPickingup;
@@ -18,6 +19,7 @@ public class PlayerScript : MonoBehaviour
 
     // Use tool
     private bool isUsingTool;
+    public GameObject currentTool;
 
     // References
     public PickupDetector pickupDetector;
@@ -26,6 +28,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody>();
+        isMoveLocked = false;
         isPickingup = false;
         isUsingTool = false;
     }
@@ -37,8 +40,12 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        moveVals = moveVals.normalized * moveSpeed * Time.deltaTime;
-        rbody.MovePosition(transform.position + moveVals);
+        if ( !isMoveLocked )
+        {
+            moveVals = moveVals.normalized * moveSpeed * Time.deltaTime;
+            rbody.MovePosition(transform.position + moveVals);
+            transform.forward = moveVals.normalized;
+        }
     }
 
     void GetInput()
@@ -56,11 +63,16 @@ public class PlayerScript : MonoBehaviour
             StartCoroutine("PickUp");
         }
 
-        if ( Input.GetAxis("Use") > 0.8 && !isUsingTool)
+        if ( Input.GetAxis("Use") > 0.8 && !isUsingTool )
         {
             // do action here
             Debug.Log("Using...");
-        }
+            isMoveLocked = true;
+            if ( currentTool != null )
+                currentTool.GetComponent<IUsable>().Use();
+
+
+        } else { isMoveLocked = false; }
     }
 
     IEnumerator PickUp()
@@ -84,7 +96,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
         // Ask inventory to place closest in
-        // InventorySingleton.in
+        // InventorySingleton.PutIn
 
         pickupDetector.enabled = false;
         isPickingup = false;
