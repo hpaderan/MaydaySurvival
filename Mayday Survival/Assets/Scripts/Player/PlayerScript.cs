@@ -78,8 +78,8 @@ public class PlayerScript : MonoBehaviour
             // do action here
             Debug.Log("Using...");
             isMoveLocked = true;
-            if ( currentTool != null )
-                currentTool.GetComponent<IUsable>().Use();
+            if ( currentTool != null ) { }
+                //currentTool.GetComponent<IUsable>().Use();
 
 
         } else { isMoveLocked = false; }
@@ -116,9 +116,9 @@ public class PlayerScript : MonoBehaviour
                     closest = pickup;
                 }
             }
+            // Ask inventory to place closest in
+            //Inventory.ADD(closest);
         }
-        // Ask inventory to place closest in
-        // InventorySingleton.PutIn
 
         pickupDetector.enabled = false;
         isPickingup = false;
