@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     // Use tool
     private bool isUsingTool;
     public GameObject currentTool;
+    public GameObject useTarg;
 
     // Drop item
     private bool isDroppingItem;
@@ -28,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     private bool isCyclingInv;
 
     // References
+    public ToolUseDetector toolUseDetector;
     public PickupDetector pickupDetector;
     private Rigidbody rbody;
     //inventory
@@ -79,7 +81,7 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Using...");
             isMoveLocked = true;
             if ( currentTool != null ) { }
-                //currentTool.GetComponent<IUsable>().Use();
+            StartCoroutine("Use");
 
 
         } else { isMoveLocked = false; }
@@ -94,6 +96,15 @@ public class PlayerScript : MonoBehaviour
         if ( Input.GetAxis("CycleInv") != 0 && !isCyclingInv)
         {
             StartCoroutine("CycleInv");
+        }
+    }
+
+    void Use() {
+        //  if ( obj.GetComponent<scriptHere>().toolRequirement == currentTool.GetName() )
+        //      obj.GetComponent<scriptHere>().Use();
+        foreach ( GameObject obj in toolUseDetector.detected ) {
+            if ( obj.toolReq == currentTool.GetName() )
+                obj.Use();
         }
     }
 
