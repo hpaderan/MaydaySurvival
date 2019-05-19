@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
 
     // Pick up
     private bool isPickingup;
+    public float pickUpRange = 1f;
     private GameObject pickupTarg;
     public Transform pickupPoint;
 
@@ -44,7 +45,6 @@ public class PlayerScript : MonoBehaviour
         isUsingTool = false;
         isDroppingItem = false;
         isCyclingInv = false;
-        inventory.OnItemChangeCallBack();
     }
 
     void Update()
@@ -110,7 +110,7 @@ public class PlayerScript : MonoBehaviour
         //      obj.GetComponent<scriptHere>().Use();
         float dst = float.MaxValue;
         GameObject g = null;
-        foreach (GameObject obj in toolUseDetector.detected)
+        foreach (GameObject obj in toolUseDetector.FindInteractables(pickUpRange))
         {
             float objDst = Vector3.Distance(obj.transform.position, transform.position);
             if (objDst < dst)
@@ -119,7 +119,11 @@ public class PlayerScript : MonoBehaviour
                 g = obj;
             }
         }
-        if (g.GetComponent<BuiltStructure>() != null)
+        if(g.GetComponent<Dropbox>() != null)
+        {
+            g.GetComponent<Dropbox>().DepositItem(inventory.items[inventory.selectedItem]);
+        }
+        else if (g.GetComponent<BuiltStructure>() != null)
         {
             if ((Crystal)currentTool != null)
             {

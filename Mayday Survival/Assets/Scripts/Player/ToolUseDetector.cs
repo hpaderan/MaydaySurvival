@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class ToolUseDetector : MonoBehaviour
 {
-    public List<GameObject> detected;
-
-    void OnTriggerEnter(Collider col)
+    public LayerMask mask;
+    public List<GameObject> FindInteractables(float radius)
     {
-        if ( col.gameObject.CompareTag("Object") )
+        List<GameObject> objs = new List<GameObject>();
+        Collider[] col = Physics.OverlapSphere(transform.position, radius, mask);
+        for (int i = 0; i < col.Length; i++)
         {
-            detected.Add(col.gameObject);
+            objs.Add(col[i].gameObject);
         }
-    }
-
-    void OnDisable()
-    {
-        detected.Clear();
+        return objs;
     }
 }

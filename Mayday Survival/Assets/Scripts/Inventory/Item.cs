@@ -37,7 +37,6 @@ public class Item : MonoBehaviour
     public virtual void DropItem()
     {
         Debug.Log("Drop item" + name);
-        Inventory.instance.Remove(this);
         transform.parent = null;
         gameObject.SetActive(true);
 

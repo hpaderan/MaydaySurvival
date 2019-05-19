@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
+public class ActiveEvent
+{
+    public Event aEvent;
+    public float timeStamp;
+}
 public class EventManager : MonoBehaviour
 {
     #region singleton
     public static EventManager instance = null;
-
+    public List<EventDeck> startingDecks;
     void Awake()
     {
         //Check if instance already exists
@@ -17,22 +22,25 @@ public class EventManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
     #endregion
+
     public int activeNum = 3;
     public List<Event> allEvents;
     public List<Event> finishedEvents;
 
     public List<BuildReward> rewards;
 
-    public struct ActiveEvent
-    {
-        public Event aEvent;
-        public float timeStamp;
-    }
+
 
     public List<ActiveEvent> activeEvents;
 
     public float eventWait = 10f;
-
+    private void Start()
+    {
+        foreach (EventDeck d in startingDecks)
+        {
+            AddDeck(d);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -90,7 +98,7 @@ public class EventManager : MonoBehaviour
                     }
                 }
             }
-            
+
         }
     }
     /// <summary>
@@ -112,8 +120,9 @@ public class EventManager : MonoBehaviour
         {
             if (activeEvents[i].aEvent == e)
             {
-                if(e.oneUse) { finishedEvents.Add(e); }
-                activeEvents[i] = new ActiveEvent { aEvent = null, timeStamp = Time.time };
+                if (e.oneUse) { finishedEvents.Add(e); }
+                activeEvents[i].aEvent = null;
+                activeEvents[i].timeStamp = Time.time;
             }
         }
     }
@@ -124,15 +133,18 @@ public class EventManager : MonoBehaviour
     /// <returns></returns>
     public bool CheckEvent(Event e)
     {
-        bool containEvent = false;
-        for (int i = 0; i < activeEvents.Count; i++)
+        bool notFoundEvent = true;
+        if (activeEvents != null)
         {
-            if (activeEvents[i].aEvent == e)
+            for (int i = 0; i < activeEvents.Count; i++)
             {
-                containEvent = true;
+                if (activeEvents[i].aEvent == e)
+                {
+                    notFoundEvent = false;
+                }
             }
         }
-        return containEvent;
+        return notFoundEvent;
     }
     /// <summary>
     /// Draw a new event from the list to become and active event
@@ -164,23 +176,26 @@ public class EventManager : MonoBehaviour
     private void CheckDeck()
     {
         //Check if no active events
-        if (allEvents.Count > 0)
+        if (allEvents != null)
         {
-            do
+            if (allEvents.Count > 0)
             {
-                int i = Random.Range(0, allEvents.Count);
-                if (allEvents[i].TryEvent())
+                do
                 {
-                    ActiveEvent newE = new ActiveEvent
+                    int i = Random.Range(0, allEvents.Count);
+                    if (allEvents[i].TryEvent())
                     {
-                        aEvent = allEvents[i],
-                        timeStamp = Time.time
-                    };
+                        ActiveEvent newE = new ActiveEvent
+                        {
+                            aEvent = allEvents[i],
+                            timeStamp = Time.time
+                        };
 
-                    activeEvents.Add(newE);
+                        activeEvents.Add(newE);
+                    }
                 }
+                while (activeEvents.Count < 1);
             }
-            while (activeEvents.Count < 1);
         }
         //Check for timed out active events
         if (activeEvents != null)
