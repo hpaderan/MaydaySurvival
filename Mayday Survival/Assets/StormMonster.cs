@@ -13,15 +13,18 @@ public class StormMonster : MonoBehaviour
     private float defaultSight;
     public bool flee;
     private Rigidbody rb;
-    [SerializeField]
     private Transform target;
-    public LayerMask mask;
+    private LayerMask crystalMask;
+    private LayerMask crysPlayerMask;
+    private LayerMask mask;
 
     private float defaultSpeed;
     Vector3 wanderDir = Vector3.zero;
     private float wanDir;
-    [SerializeField]
     private bool isWandering;
+
+    public float crystalHealth;
+    private float defCrysHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,10 @@ public class StormMonster : MonoBehaviour
         defaultSpeed = speed;
         isWandering = false;
         wanDir = Random.Range(-180.0f,180.0f);
+        defCrysHealth = crystalHealth;
+        crystalMask = LayerMask.GetMask("Crystal");
+        crysPlayerMask = LayerMask.GetMask("Crystal","Player");
+        mask = crystalMask;
     }
 
     // Update is called once per frame
@@ -45,17 +52,19 @@ public class StormMonster : MonoBehaviour
     }
     private void FindTarget()
     {
+        CheckInv();
         Collider[] colliders = Physics.OverlapSphere(transform.position,sight,mask);
         if ( colliders.Length > 0 )
-        {/*
-            if ( target == null || target.tag != "Crystal" )
-                target = colliders[0].transform;*/
+        {
             int idx = 0;
             while ( idx < colliders.Length ) {
                 if ( target == null && colliders[idx].transform.CompareTag("Crystal") )
                 {
                     isWandering = false;
                     target = colliders[idx].transform;
+                    // reset crystal health timer
+
+                    crystalHealth = defCrysHealth;
                 } else {
                     float cDistance = Vector3.Distance(transform.position,colliders[idx].transform.position);
                     if ( cDistance < Vector3.Distance(transform.position,target.position) )
@@ -74,7 +83,6 @@ public class StormMonster : MonoBehaviour
             if ( !isWandering )
             {
                 isWandering = true;
-                Debug.Log("Start wanderingDir");
                 StartCoroutine("ChooseWanderDir");
             }
         }
@@ -93,14 +101,17 @@ public class StormMonster : MonoBehaviour
             if ( Vector3.Distance(transform.position,target.transform.position) <= 1.2f )
             {
                 speed = 0;
+                crystalHealth -= Time.deltaTime;
+                if ( crystalHealth <= 0 ) {
+                    Destroy(target.gameObject);
+                }
             } else
             {
                 speed = defaultSpeed;
             }
-        } 
-        float foo = target != null ? Mathf.Clamp01(Vector3.Distance(transform.position,target.position)) : 1;
-        transform.Translate(transform.forward * Time.deltaTime * speed * foo);
-        //Debug.Log(foo);
+        }
+
+        transform.Translate(transform.forward * Time.deltaTime * speed);
     }
 
     private void OnDrawGizmos()
@@ -133,13 +144,11 @@ public class StormMonster : MonoBehaviour
         if ( isWandering )
         {
             StartCoroutine("WanderPause");
-            //Debug.Log("Start wanderPause");
         }
     }
 
     IEnumerator WanderPause()
     {
-        //wanderDir = Vector3.zero;
         speed = 0;
 
         yield return new WaitForSeconds(2.0f);
@@ -147,7 +156,21 @@ public class StormMonster : MonoBehaviour
         if ( isWandering )
         {
             StartCoroutine("ChooseWanderDir");
-           // Debug.Log("start choosewanderdir");
+        }
+    }
+
+    private void CheckInv() {
+        if ( Inventory.instance.items.Count > 0 )
+        {
+            foreach ( Item item in Inventory.instance.items )
+            {
+                if ( item.ItemName == "Crystal" )
+                {
+                    mask = crysPlayerMask;
+                    break;
+                }
+                mask = crystalMask;
+            }
         }
     }
 }
