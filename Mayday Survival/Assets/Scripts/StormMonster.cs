@@ -109,7 +109,7 @@ public class StormMonster : MonoBehaviour
                 speed = defaultSpeed;
             }
         }
-        Debug.Log(rb.velocity);
+       // Debug.Log(rb.velocity);
         transform.Translate(transform.forward * Time.deltaTime * speed, Space.World);
     }
 

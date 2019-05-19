@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 8252881302122364910}
   - component: {fileID: 2428731828404519703}
   - component: {fileID: 4693902377439336215}
-  m_Layer: 0
+  - component: {fileID: 8992602210665196082}
+  - component: {fileID: 6751481751102553080}
+  m_Layer: 14
   m_Name: FusionCore
   m_TagString: ShipPart
   m_Icon: {fileID: 0}
@@ -92,3 +94,39 @@ CapsuleCollider:
   m_Height: 131.64304
   m_Direction: 1
   m_Center: {x: 0, y: -0.9032974, z: 0}
+--- !u!114 &8992602210665196082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4145634609220990923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5ae2b04d69cc54cb79bcc9372a55b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDrop: 3
+  maxDrop: 12
+  health: 15
+  droppedItem: {fileID: 8981578452230701172, guid: ab154482289c744499b27bc8497b7d0b,
+    type: 3}
+  requiredItem: {fileID: 4366745866759326839, guid: f502432a5a70b4d4cafaca8f6c748ea4,
+    type: 3}
+  charge: 100
+  drainRate: 0.1
+--- !u!114 &6751481751102553080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4145634609220990923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423238760607f1d4b8854bbe0816cc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  buildEffect: {fileID: 0}
+  health: 20

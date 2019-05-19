@@ -10,20 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a60373cc1ae0146888579e8d7f7afb, type: 3}
-  m_Name: Get more crystals with grass
+  m_Name: Collect Plutonium
   m_EditorClassIdentifier: 
   isAvailable: 1
   missions:
   - chance: 100
     canPlay: 1
-    oneUse: 0
-    title: Get Crystals
+    oneUse: 1
+    title: Build a Radio Tower
     requirments:
     - number: 0
-      numberNeeded: 4
+      numberNeeded: 3
+      item: {fileID: -6073660365283402087, guid: ab154482289c744499b27bc8497b7d0b,
+        type: 3}
+    - number: 0
+      numberNeeded: 10
+      item: {fileID: 1776576249497751626, guid: d9ddf17eacb0dcb4a94410b26fe92423,
+        type: 3}
+    - number: 0
+      numberNeeded: 6
+      item: {fileID: 4429533229854825807, guid: 53653c8f9fb74894796c2d7bb3871433,
+        type: 3}
+    - number: 0
+      numberNeeded: 5
       item: {fileID: 4586569049433834033, guid: 20290beb932ba6b4488c49d77fde5f93,
         type: 3}
     iRewards: []
-    bRewards: []
+    bRewards:
+    - {fileID: 0}
     dRewards: []
   disaster: []

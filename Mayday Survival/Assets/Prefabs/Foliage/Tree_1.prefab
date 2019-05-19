@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5612906136042071553}
   - component: {fileID: 2222954191103335160}
   - component: {fileID: 6161933688385119995}
+  - component: {fileID: 5703806006044949446}
   m_Layer: 0
   m_Name: Tree_1
   m_TagString: Tree
@@ -92,3 +93,21 @@ CapsuleCollider:
   m_Height: 155.5
   m_Direction: 1
   m_Center: {x: -16.26, y: -84.46, z: -1.4}
+--- !u!114 &5703806006044949446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496894608748064292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea29c7b750792c41948e4a332ed1af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDrop: 3
+  maxDrop: 12
+  health: 15
+  droppedItem: {fileID: 3716563897119953285, guid: f6aadf27cdc65554d90c4437e92a9ad7,
+    type: 3}
+  requiredItem: {fileID: 0}

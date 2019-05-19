@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6080538818520305271}
   - component: {fileID: 531108911318282894}
   - component: {fileID: 9266351992700335}
+  - component: {fileID: 9179710123213040936}
   m_Layer: 0
   m_Name: Radio_Tower
   m_TagString: Untagged
@@ -91,3 +92,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 220.41228, y: 320.89307, z: 243.13992}
   m_Center: {x: 0.1750412, y: -22.651543, z: 0.0000038146973}
+--- !u!114 &9179710123213040936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261430097162110546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423238760607f1d4b8854bbe0816cc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  buildEffect: {fileID: 0}
+  health: 0

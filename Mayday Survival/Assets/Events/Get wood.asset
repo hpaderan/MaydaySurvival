@@ -10,25 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a60373cc1ae0146888579e8d7f7afb, type: 3}
-  m_Name: Make Tools
+  m_Name: Get wood
   m_EditorClassIdentifier: 
   isAvailable: 1
   missions:
   - chance: 100
-    canPlay: 1
-    oneUse: 1
-    title: Make Grass
+    canPlay: 0
+    oneUse: 0
+    title: 
     requirments:
-    - number: 1
-      numberNeeded: 3
+    - number: 0
+      numberNeeded: 5
       item: {fileID: 1825368459782339537, guid: f6aadf27cdc65554d90c4437e92a9ad7,
         type: 3}
-    - number: 0
-      numberNeeded: 1
-      item: {fileID: 225272531436524804, guid: 5d3b5638fceda60488a67c4876969e49, type: 3}
-    iRewards:
-    - {fileID: 914713499338838456, guid: 1389d37dcd6d2e449b97bbc3540302e0, type: 3}
+    iRewards: []
     bRewards: []
-    dRewards:
-    - {fileID: 11400000, guid: 5f674392501ceda47a9d4677d9fda772, type: 2}
+    dRewards: []
   disaster: []

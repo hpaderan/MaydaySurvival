@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1720004253}
   - component: {fileID: 1720004255}
   - component: {fileID: 1720004254}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4764,7 +4764,9 @@ GameObject:
   - component: {fileID: 4410768256978647974}
   - component: {fileID: 7929355939022112607}
   - component: {fileID: 5513452381703691040}
-  m_Layer: 0
+  - component: {fileID: 4450940046456501254}
+  - component: {fileID: -1394192806129408025}
+  m_Layer: 12
   m_Name: ThinCrystal
   m_TagString: Crystal
   m_Icon: {fileID: 0}
@@ -4845,3 +4847,36 @@ CapsuleCollider:
   m_Height: 155.63284
   m_Direction: 1
   m_Center: {x: -0.0000038146973, y: -39.6, z: -0.0000019073486}
+--- !u!114 &4450940046456501254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8518115848586408835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afd041bd3814d341bada02fcbaf0339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: Crystal
+  icon: {fileID: 0}
+  charge: 0
+--- !u!114 &-1394192806129408025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8518115848586408835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea29c7b750792c41948e4a332ed1af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDrop: 3
+  maxDrop: 12
+  health: 15
+  droppedItem: {fileID: 3983069631422307051, guid: 20290beb932ba6b4488c49d77fde5f93,
+    type: 3}
+  requiredItem: {fileID: 0}

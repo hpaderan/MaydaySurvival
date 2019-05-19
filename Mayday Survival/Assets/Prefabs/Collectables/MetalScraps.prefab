@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8151044268985461219}
   - component: {fileID: 2459769108767921434}
   - component: {fileID: 2529960266638960671}
+  - component: {fileID: 1776576249497751626}
   m_Layer: 0
   m_Name: MetalScraps
   m_TagString: SmallItems
@@ -91,3 +92,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 117.4, y: 29.634918, z: 78}
   m_Center: {x: 1.3501854, y: -0.66222286, z: 2.3091373}
+--- !u!114 &1776576249497751626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187798947223658950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af398e67b3d50c40871916ee98ff614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: Metal Scraps
+  icon: {fileID: 21300000, guid: 56d8c1eb60e65dd43acbc8984506f507, type: 3}

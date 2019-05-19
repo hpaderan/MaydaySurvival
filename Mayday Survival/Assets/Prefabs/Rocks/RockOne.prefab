@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4041273285807517337}
   - component: {fileID: 7721973305982243424}
   - component: {fileID: 7505679242236552926}
-  m_Layer: 0
+  - component: {fileID: 221647353754330281}
+  m_Layer: 15
   m_Name: RockOne
   m_TagString: Rock
   m_Icon: {fileID: 0}
@@ -91,3 +92,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 63.96
   m_Center: {x: 10.27, y: -16.7, z: -1.38}
+--- !u!114 &221647353754330281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8292573612142814908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea29c7b750792c41948e4a332ed1af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDrop: 3
+  maxDrop: 12
+  health: 15
+  droppedItem: {fileID: 4187798947223658950, guid: d9ddf17eacb0dcb4a94410b26fe92423,
+    type: 3}
+  requiredItem: {fileID: 0}

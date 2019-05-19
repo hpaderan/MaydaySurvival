@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4009511417028429905}
   - component: {fileID: 7248592016245896360}
   - component: {fileID: 4464007695211921606}
+  - component: {fileID: -6073660365283402087}
   m_Layer: 0
   m_Name: Plutonium
   m_TagString: SmallItems
@@ -91,3 +92,17 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 23.7
   m_Center: {x: 0.03355694, y: 2.1237555, z: -0.2963686}
+--- !u!114 &-6073660365283402087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8981578452230701172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af398e67b3d50c40871916ee98ff614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: Plutonium
+  icon: {fileID: 21300000, guid: 11e557fd83a7b9f4f9a0234ee39cbd99, type: 3}

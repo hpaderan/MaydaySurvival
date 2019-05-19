@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8950429593957690952}
   - component: {fileID: 8196563814167773075}
   - component: {fileID: 6102606852473154537}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4764,7 +4764,9 @@ GameObject:
   - component: {fileID: 3033681596577371866}
   - component: {fileID: 8729458483816671779}
   - component: {fileID: 5375678156474007890}
-  m_Layer: 0
+  - component: {fileID: 7636383909347264037}
+  - component: {fileID: 3379124672102408443}
+  m_Layer: 12
   m_Name: FatCrystal
   m_TagString: Crystal
   m_Icon: {fileID: 0}
@@ -4844,3 +4846,35 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 61.63539
   m_Center: {x: 0, y: -65.59, z: 0}
+--- !u!114 &7636383909347264037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6996784236270952191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afd041bd3814d341bada02fcbaf0339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: Something
+  icon: {fileID: 0}
+  charge: 0
+--- !u!114 &3379124672102408443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6996784236270952191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea29c7b750792c41948e4a332ed1af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDrop: 3
+  maxDrop: 12
+  health: 15
+  droppedItem: {fileID: 0}
+  requiredItem: {fileID: 0}

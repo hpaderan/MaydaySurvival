@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a60373cc1ae0146888579e8d7f7afb, type: 3}
-  m_Name: Get more crystals with grass
+  m_Name: Find Plutonium
   m_EditorClassIdentifier: 
   isAvailable: 1
   missions:
-  - chance: 100
-    canPlay: 1
+  - chance: 0
+    canPlay: 0
     oneUse: 0
-    title: Get Crystals
+    title: Find the Fusion Reactor and collect Plutonium
     requirments:
     - number: 0
-      numberNeeded: 4
-      item: {fileID: 4586569049433834033, guid: 20290beb932ba6b4488c49d77fde5f93,
+      numberNeeded: 1
+      item: {fileID: -6073660365283402087, guid: ab154482289c744499b27bc8497b7d0b,
         type: 3}
     iRewards: []
     bRewards: []

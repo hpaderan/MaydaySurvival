@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7079346944180698803}
   - component: {fileID: 3531505879090774602}
   - component: {fileID: 2754936901233624114}
-  m_Layer: 0
+  - component: {fileID: -5739187155624314599}
+  m_Layer: 15
   m_Name: RockTwo
   m_TagString: Rock
   m_Icon: {fileID: 0}
@@ -92,3 +93,21 @@ CapsuleCollider:
   m_Height: 138.60512
   m_Direction: 0
   m_Center: {x: 7.8693485, y: 2.099648, z: 2.1911697}
+--- !u!114 &-5739187155624314599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2972019436346341014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea29c7b750792c41948e4a332ed1af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDrop: 3
+  maxDrop: 12
+  health: 15
+  droppedItem: {fileID: 4187798947223658950, guid: d9ddf17eacb0dcb4a94410b26fe92423,
+    type: 3}
+  requiredItem: {fileID: 0}

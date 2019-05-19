@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5243164894498632722}
   - component: {fileID: 2017612471592306923}
   - component: {fileID: 4961004031622286096}
+  - component: {fileID: 4429533229854825807}
   m_Layer: 0
   m_Name: Circuits
   m_TagString: SmallItems
@@ -91,3 +92,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 146.4, y: 31.9, z: 115.46288}
   m_Center: {x: 172.99266, y: -23.294075, z: 33.710476}
+--- !u!114 &4429533229854825807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271106405199150135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af398e67b3d50c40871916ee98ff614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemName: Circuit
+  icon: {fileID: 21300000, guid: a63d18066f852924291d8d35f87abe38, type: 3}

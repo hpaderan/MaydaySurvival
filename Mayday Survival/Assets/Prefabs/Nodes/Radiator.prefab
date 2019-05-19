@@ -12,7 +12,10 @@ GameObject:
   - component: {fileID: 3198224784307641234}
   - component: {fileID: 9178029364217522027}
   - component: {fileID: 1520766639844330660}
-  m_Layer: 0
+  - component: {fileID: 6170641536538647652}
+  - component: {fileID: -2574276591210930399}
+  - component: {fileID: 807118533018856679}
+  m_Layer: 14
   m_Name: Radiator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,3 +94,59 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 56.331917
   m_Center: {x: 0, y: -0.053621292, z: 0.0000019073486}
+--- !u!114 &6170641536538647652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7449586109926347703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea29c7b750792c41948e4a332ed1af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDrop: 3
+  maxDrop: 12
+  health: 15
+  droppedItem: {fileID: 271106405199150135, guid: 53653c8f9fb74894796c2d7bb3871433,
+    type: 3}
+  requiredItem: {fileID: 4366745866759326839, guid: f502432a5a70b4d4cafaca8f6c748ea4,
+    type: 3}
+--- !u!114 &-2574276591210930399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7449586109926347703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423238760607f1d4b8854bbe0816cc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  buildEffect: {fileID: 271106405199150135, guid: 53653c8f9fb74894796c2d7bb3871433,
+    type: 3}
+  health: 20
+--- !u!114 &807118533018856679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7449586109926347703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5ae2b04d69cc54cb79bcc9372a55b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDrop: 3
+  maxDrop: 12
+  health: 15
+  droppedItem: {fileID: 271106405199150135, guid: 53653c8f9fb74894796c2d7bb3871433,
+    type: 3}
+  requiredItem: {fileID: 4366745866759326839, guid: f502432a5a70b4d4cafaca8f6c748ea4,
+    type: 3}
+  charge: 100
+  drainRate: 0.1
