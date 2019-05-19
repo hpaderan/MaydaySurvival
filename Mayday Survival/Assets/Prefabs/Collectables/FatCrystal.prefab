@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6287812234897616108}
   - component: {fileID: 3033681596577371866}
   - component: {fileID: 8729458483816671779}
+  - component: {fileID: 5375678156474007890}
   m_Layer: 0
   m_Name: FatCrystal
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &5375678156474007890
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6996784236270952191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 61.63539
+  m_Center: {x: 0, y: -65.59, z: 0}

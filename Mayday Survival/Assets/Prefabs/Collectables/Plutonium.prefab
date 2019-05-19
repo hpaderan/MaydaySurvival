@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5404218246915519079}
   - component: {fileID: 4009511417028429905}
   - component: {fileID: 7248592016245896360}
+  - component: {fileID: 4464007695211921606}
   m_Layer: 0
   m_Name: Plutonium
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &4464007695211921606
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8981578452230701172}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 23.7
+  m_Center: {x: 0.03355694, y: 2.1237555, z: -0.2963686}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 884206551723906005}
   - component: {fileID: 8151044268985461219}
   - component: {fileID: 2459769108767921434}
+  - component: {fileID: 2529960266638960671}
   m_Layer: 0
   m_Name: MetalScraps
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2529960266638960671
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187798947223658950}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 117.4, y: 29.634918, z: 78}
+  m_Center: {x: 1.3501854, y: -0.66222286, z: 2.3091373}
