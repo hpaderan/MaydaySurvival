@@ -108,6 +108,7 @@ public class PlayerScript : MonoBehaviour
     {
         //  if ( obj.GetComponent<scriptHere>().toolRequirement == currentTool.GetName() )
         //      obj.GetComponent<scriptHere>().Use();
+        isUsingTool = true;
         float dst = float.MaxValue;
         List<GameObject> goList = toolUseDetector.FindInteractables(pickUpRange);
         GameObject g = null;
@@ -115,6 +116,7 @@ public class PlayerScript : MonoBehaviour
         {
             foreach (GameObject obj in goList)
             {
+                // update closest obj
                 float objDst = Vector3.Distance(obj.transform.position, transform.position);
                 if (objDst < dst)
                 {
@@ -122,10 +124,14 @@ public class PlayerScript : MonoBehaviour
                     g = obj;
                 }
             }
+
+            // deposit item into dropbox
             if (g.GetComponent<Dropbox>() != null)
             {
                 g.GetComponent<Dropbox>().DepositItem(inventory.items[inventory.selectedItem]);
             }
+
+            // 
             else if (g.GetComponent<BuiltStructure>() != null)
             {
                 if ((Crystal)currentTool != null)
@@ -136,10 +142,11 @@ public class PlayerScript : MonoBehaviour
             }
             else if (g.GetComponent<GatherNode>() != null)
             {
-                g.GetComponent<GatherNode>().Damage(Random.Range(1f, 5f), currentTool);
+                g.GetComponent<GatherNode>().Damage(Random.Range(1f, 5f), Inventory.instance.items[Inventory.instance.selectedItem]);
             }
         }
         yield return new WaitForSeconds(0.8f);
+        isUsingTool = false;
     }
 
     IEnumerator PickUp()

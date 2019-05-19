@@ -9,7 +9,7 @@ public class Mission : Event
     public List<Requirment> requirments = new List<Requirment>();
     public List<ItemReward> iRewards;
     public List<BuildReward> bRewards;
-    public List<DeckReward> dRewards;
+    public List<EventDeck> dRewards;
     public bool TryEvent()
     {
         if (EventManager.instance.CheckEvent(this))
@@ -43,7 +43,6 @@ public class Mission : Event
     public override void FinishEvent()
     {
         Debug.Log("Mission Complete");
-
         for (int i = 0; i < iRewards.Count; i++)
         {
             iRewards[i].Activate();
@@ -54,7 +53,7 @@ public class Mission : Event
         }
         for (int i = 0; i < dRewards.Count; i++)
         {
-            dRewards[i].Activate();
+            EventManager.instance.AddDeck(dRewards[i]);
         }
         EventManager.instance.FinishEvent(this);
 
@@ -63,9 +62,10 @@ public class Mission : Event
     {
         base.UpdateEvent();
         int completed = 0;
+        Dropbox db = EventManager.instance.GetComponent<Dropbox>();
         for (int i = 0; i < requirments.Count; i++)
         {
-            requirments[i].number = EventManager.instance.GetComponent<Dropbox>().GetItemNum(requirments[i].item);
+            requirments[i].number = db.GetItemNum(requirments[i].item);
             if (requirments[i].number >= requirments[i].numberNeeded)
             {
                 completed++;
@@ -74,6 +74,7 @@ public class Mission : Event
 
         if (completed == requirments.Count)
         {
+            db.ClearMissionItems(this);
             FinishEvent();
         }
     }

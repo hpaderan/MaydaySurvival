@@ -118,8 +118,11 @@ public class EventManager : MonoBehaviour
         {
             if (activeMissions[i] == e)
             {
-                if (e.oneUse) { finishedEvents.Add(e); }
-                activeMissions[i] = null;
+                if (e.oneUse)
+                {
+                    finishedEvents.Add(e);
+                    allMissions.Remove(e);
+                }
             }
         }
     }
@@ -152,14 +155,13 @@ public class EventManager : MonoBehaviour
         Mission e = null;
         if (allMissions.Count > 0)
         {
-            do
+            for (int i = 0; i < allMissions.Count; i++)
             {
-                int i = Random.Range(0, allMissions.Count -1);
                 if (allMissions[i].TryEvent())
                 {
                     e = allMissions[i];
                 }
-            } while (e == null);
+            }
         }
         else
         {

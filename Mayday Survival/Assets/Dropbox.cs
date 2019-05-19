@@ -5,10 +5,12 @@ using UnityEngine;
 public class Dropbox : MonoBehaviour
 {
     private EventManager em;
+    public Transform dropPoint;
     public List<Item> items;
     private void Start()
     {
         em = EventManager.instance;
+        dropPoint = transform.GetChild(0);
     }
     public void DepositItem(Item item)
     {
@@ -27,5 +29,21 @@ public class Dropbox : MonoBehaviour
             }
         }
         return x;
+    }
+
+    public void ClearMissionItems(Mission m)
+    {
+        for (int i = 0; i < m.requirments.Count; i++)
+        {
+            int num = GetItemNum(m.requirments[i].item);
+            for (int j = 0; j < items.Count; j++)
+            {
+                if (items[j].ItemName == m.requirments[i].item.ItemName && num != 0)
+                {
+                    items.Remove(items[j]);
+                    num--;
+                }
+            }
+        }
     }
 }

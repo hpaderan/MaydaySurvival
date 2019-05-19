@@ -5,7 +5,6 @@ using UnityEngine;
 public class BuildReward : Reward
 {
     public GameObject buildEffect;
-    public EventDeck eventDeck;
     private Animator anim;
     public float health;
     private float maxHealth;
@@ -24,7 +23,6 @@ public class BuildReward : Reward
     {
         base.Activate();
         EventManager.instance.rewards.Add(this);
-        EventManager.instance.AddDeck(eventDeck);
     }
 
     public void Kill()
@@ -33,6 +31,5 @@ public class BuildReward : Reward
         //anim blow up
         Destroy(gameObject, 2f);
         Debug.Log(name + " destroyed in event");
-        EventManager.instance.RemoveDeck(eventDeck);
     }
 }
