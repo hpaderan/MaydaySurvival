@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Crystal
+  - ShipPart
+  - Tree
+  - Rock
+  - Grass
+  - SmallItems
   layers:
   - Default
   - TransparentFX
