@@ -15,6 +15,9 @@ public class CameraController : MonoBehaviour
 
         Vector3 endPosition = player.transform.position + new Vector3(0,camHeight,-camDepth);
         //transform.position = endPosition;
-        transform.position = Vector3.LerpUnclamped(transform.position, endPosition, foo);
+        if (Vector3.Distance(transform.position, endPosition) > 5)
+        {
+            transform.position = Vector3.LerpUnclamped(transform.position, endPosition, foo);
+        }
     }
 }
