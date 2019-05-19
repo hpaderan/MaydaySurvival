@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 9000
-  moveSpeed: 100
+  moveSpeed: 180
   pickUpRange: 1
   pickupPoint: {fileID: 8133441256906774363}
   currentTool: {fileID: 0}
