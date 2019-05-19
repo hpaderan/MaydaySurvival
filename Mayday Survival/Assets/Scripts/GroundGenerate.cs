@@ -31,6 +31,7 @@ public class GroundGenerate : MonoBehaviour
 
     private List<Vector3> gridPositions = new List<Vector3>();
     //keep track on used space to avoid things spwaning in the same spot
+    public List<Vector3> UsedSpace = new List<Vector3>();
 
     void InitialiseList()
     {
@@ -119,28 +120,18 @@ public class GroundGenerate : MonoBehaviour
             randomPosition.y = objChoose.transform.position.y;
             //draw this objectout
             Instantiate(objChoose, randomPosition, objChoose.transform.rotation);
- 
-
+            //save this into a used space list
+            UsedSpace.Add(randomPosition);
         }
     }
-
+    //
     public void SetupScene(int level)
     {
-        //
+        //clear the previous
+        UsedSpace.Clear();
         MapSetUp();
         InitialiseList();
         LayoutObjectAtRandom(ShipParts, ShipCount, ShipCount);
         //LayoutObjectAtRandom this will be used as the things on the map
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9093081808702705778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9093081808702705776}
+  - component: {fileID: 9093081808702705777}
+  m_Layer: 0
+  m_Name: GroundGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9093081808702705776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9093081808702705778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1116.8999, y: 16.921272, z: 732}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9093081808702705777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9093081808702705778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddb3a53e1c01784694eeafd7419e742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapSize: 10
+  Grounds:
+  - {fileID: 5721905894567943223, guid: 144d4d9e6e4805d47b8318b82cf17cd8, type: 3}
+  - {fileID: 3714190026840735312, guid: 61d6adfbcdd873049a5a1cbdc63899ae, type: 3}
+  - {fileID: 5272989907173349948, guid: 2e1fb6cf6d707fc4a9993f11ddc89443, type: 3}
+  ShipParts:
+  - {fileID: 4145634609220990923, guid: e9b9c0884fc179b4392f2a82a507ce0b, type: 3}
+  UsedSpace: []

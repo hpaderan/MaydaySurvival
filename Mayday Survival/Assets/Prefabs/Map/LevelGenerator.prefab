@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4916631956786663789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4916631956786663787}
+  - component: {fileID: 4916631956786663786}
+  - component: {fileID: 4916631956786663784}
+  - component: {fileID: 4916631956786663785}
+  m_Layer: 0
+  m_Name: LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4916631956786663787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916631956786663789}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4916631956786663786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916631956786663789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddb3a53e1c01784694eeafd7419e742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapSize: 10
+  Grounds:
+  - {fileID: 5721905894567943223, guid: 144d4d9e6e4805d47b8318b82cf17cd8, type: 3}
+  - {fileID: 3714190026840735312, guid: 61d6adfbcdd873049a5a1cbdc63899ae, type: 3}
+  - {fileID: 5272989907173349948, guid: 2e1fb6cf6d707fc4a9993f11ddc89443, type: 3}
+  ShipParts:
+  - {fileID: 4145634609220990923, guid: e9b9c0884fc179b4392f2a82a507ce0b, type: 3}
+  UsedSpace: []
+--- !u!114 &4916631956786663784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916631956786663789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e46eae7df2a12489c73f45cc26d97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundScript: {fileID: 0}
+  ObjectScript: {fileID: 0}
+--- !u!114 &4916631956786663785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916631956786663789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a612dcc390d7e0b48a7c95b330afaa42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tree:
+  - {fileID: 496894608748064292, guid: 6d4d7d495a5f5634e945d799bf5cdb7f, type: 3}
+  - {fileID: 1417351955111197334, guid: f74b5bf6a30421b49b2d9db4ce80da0e, type: 3}
+  Crystal:
+  - {fileID: 6996784236270952191, guid: 9d5fca2d5e73151438d09ebf490ae5da, type: 3}
+  - {fileID: 564306680486456967, guid: 020ca984d1033784e93106b0330c826e, type: 3}
+  - {fileID: 8518115848586408835, guid: 16c4a672695863f4b999b3c389bfa3e4, type: 3}
+  Rock:
+  - {fileID: 8292573612142814908, guid: a36a4fae1be9d3c468bd6bd58e243294, type: 3}
+  - {fileID: 2972019436346341014, guid: b98037d6e89ce6f4bbcfdd079976c085, type: 3}
+  Grass:
+  - {fileID: 3297815449122015217, guid: 512eabb43ff09124b9b1b63100bfed31, type: 3}
+  - {fileID: 8058475158252660372, guid: d063f15accecd0a40861a270c490515a, type: 3}
+  - {fileID: 6251816518329897842, guid: f809a62ac9e6b034a873c37d740f1bb5, type: 3}
+  SmallItems:
+  - {fileID: 271106405199150135, guid: 53653c8f9fb74894796c2d7bb3871433, type: 3}
+  - {fileID: 4187798947223658950, guid: d9ddf17eacb0dcb4a94410b26fe92423, type: 3}
+  - {fileID: 8981578452230701172, guid: ab154482289c744499b27bc8497b7d0b, type: 3}
+  groundScript: {fileID: 0}
