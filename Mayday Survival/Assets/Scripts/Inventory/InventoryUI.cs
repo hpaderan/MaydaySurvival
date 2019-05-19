@@ -37,6 +37,14 @@ public class InventoryUI : MonoBehaviour
             if (i< inventory.items.Count)
             {
                 slots[i].AddItem(inventory.items[i]);
+                if(inventory.selectedItem == i)
+                {
+                    slots[i].selected.enabled = true;
+                }
+                else
+                {
+                    slots[i].selected.enabled = false;
+                }
             }
             else
             {

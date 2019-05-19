@@ -8,7 +8,7 @@ public class PickupDetector : MonoBehaviour
 
     void OnTriggerEnter (Collider col)
     {
-        if ( col.gameObject.CompareTag("Pickup") ) {
+        if ( col.tag.Contains("Pickup") ) {
             detected.Add(col.gameObject);
         }
     }

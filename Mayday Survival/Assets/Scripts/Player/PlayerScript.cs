@@ -16,10 +16,11 @@ public class PlayerScript : MonoBehaviour
     // Pick up
     private bool isPickingup;
     private GameObject pickupTarg;
+    public Transform pickupPoint;
 
     // Use tool
     private bool isUsingTool;
-    public GameObject currentTool;
+    public Item currentTool;
     public GameObject useTarg;
 
     // Drop item
@@ -33,17 +34,19 @@ public class PlayerScript : MonoBehaviour
     public PickupDetector pickupDetector;
     private Rigidbody rbody;
     //inventory
-
+    private Inventory inventory;
     void Start()
     {
+        inventory = Inventory.instance;
         rbody = GetComponent<Rigidbody>();
         isMoveLocked = false;
         isPickingup = false;
         isUsingTool = false;
         isDroppingItem = false;
         isCyclingInv = false;
+        inventory.OnItemChangeCallBack();
     }
-    
+
     void Update()
     {
         GetInput();
@@ -51,7 +54,7 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ( !isMoveLocked )
+        if (!isMoveLocked)
         {
             moveVals = moveVals.normalized * moveSpeed * Time.deltaTime;
             rbody.MovePosition(transform.position + moveVals);
@@ -66,79 +69,102 @@ public class PlayerScript : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        moveVals.Set(h,0f,v);
+        moveVals.Set(h, 0f, v);
 
         // Action inputs
-        if ( Input.GetAxis("Pickup") > 0.8 && !isPickingup) {
+        if (Input.GetAxis("Pickup") > 0.8 && !isPickingup)
+        {
             // do action here
             Debug.Log("Picking up...");
             StartCoroutine("PickUp");
         }
 
-        if ( Input.GetAxis("Use") > 0.8 && !isUsingTool )
+        if (Input.GetAxis("Use") > 0.8 && !isUsingTool)
         {
             // do action here
             Debug.Log("Using...");
             isMoveLocked = true;
-            if ( currentTool != null ) { }
+            if (currentTool != null) { }
             StartCoroutine("Use");
 
 
-        } else { isMoveLocked = false; }
+        }
+        else { isMoveLocked = false; }
 
-        if ( Input.GetAxisRaw("Drop") == 1 && !isDroppingItem)
+        if (Input.GetAxisRaw("Drop") == 1 && !isDroppingItem)
         {
             // do action here
             Debug.Log("Dropping...");
             StartCoroutine("Drop");
         }
 
-        if ( Input.GetAxis("CycleInv") != 0 && !isCyclingInv)
+        if (Input.GetAxis("CycleInv") != 0 && !isCyclingInv)
         {
             StartCoroutine("CycleInv");
         }
     }
 
-    void Use() {
+    void Use()
+    {
         //  if ( obj.GetComponent<scriptHere>().toolRequirement == currentTool.GetName() )
         //      obj.GetComponent<scriptHere>().Use();
-        foreach ( GameObject obj in toolUseDetector.detected ) {
-            if ( obj.toolReq == currentTool.GetName() )
-                obj.Use();
+        float dst = float.MaxValue;
+        GameObject g = null;
+        foreach (GameObject obj in toolUseDetector.detected)
+        {
+            float objDst = Vector3.Distance(obj.transform.position, transform.position);
+            if (objDst < dst)
+            {
+                dst = objDst;
+                g = obj;
+            }
         }
+        if (g.GetComponent<BuiltStructure>() != null)
+        {
+            if ((Crystal)currentTool != null)
+            {
+                g.GetComponent<BuiltStructure>().Recharge((Crystal)currentTool);
+            }
+
+        }
+        else if (g.GetComponent<GatherNode>() != null)
+        {
+            g.GetComponent<GatherNode>().Damage(Random.Range(1f, 5f), currentTool);
+        }
+
     }
 
     IEnumerator PickUp()
     {
         isPickingup = true;
-        if ( pickupDetector.enabled == false )
+        if (pickupDetector.enabled == false)
             pickupDetector.enabled = true;
-        
+
         yield return new WaitForSeconds(0.2f);
 
-        if ( pickupDetector.detected.Count > 0 )
+        if (pickupDetector.detected.Count > 0)
         {
             GameObject closest = pickupDetector.detected[0];
-            foreach ( GameObject pickup in pickupDetector.detected )
+            foreach (GameObject pickup in pickupDetector.detected)
             {
-                if ( Vector3.Distance(pickup.transform.position,transform.position) <
-                     Vector3.Distance(closest.transform.position,transform.position) )
+                if (Vector3.Distance(pickup.transform.position, transform.position) <
+                     Vector3.Distance(closest.transform.position, transform.position))
                 {
                     closest = pickup;
                 }
             }
             // Ask inventory to place closest in
-            //Inventory.ADD(closest);
+            closest.GetComponent<Item>().PickUpItem(pickupPoint);
         }
 
         pickupDetector.enabled = false;
         isPickingup = false;
     }
 
-    IEnumerator Drop() {
+    IEnumerator Drop()
+    {
         isDroppingItem = true;
-        // Inventory.remove(GetItem());
-        // spawn item
+        inventory.Remove(inventory.items[inventory.selectedItem]);
         yield return new WaitForSeconds(0.8f); // short delay to prevent dropping everything
         isDroppingItem = false;
     }
@@ -148,14 +174,25 @@ public class PlayerScript : MonoBehaviour
         isCyclingInv = true;
 
         Debug.Log(Input.GetAxis("CycleInv"));
-        if ( Input.GetAxis("CycleInv") == 1 ) {
+        if (Input.GetAxis("CycleInv") == 1)
+        {
             //currentTool = inventory.getItemToRight; iff itemToRight is a tool. else null
             Debug.Log("Move inv to right");
-        } else if ( Input.GetAxis("CycleInv") < 0 ) {
+            int i = inventory.selectedItem;
+            i++;
+            i = Mathf.Clamp(i, 0, inventory.items.Count);
+            inventory.selectedItem = i;
+        }
+        else if (Input.GetAxis("CycleInv") < 0)
+        {
             //currentTool = inventory.getItemToLeft; iff itemToLeft is a tool. else null
             Debug.Log("Move inv to left");
+            int i = inventory.selectedItem;
+            i--;
+            i = Mathf.Clamp(i, 0, inventory.items.Count);
+            inventory.selectedItem = i;
         }
-
+        inventory.OnItemChangeCallBack();
         yield return new WaitForSeconds(0.2f);
         isCyclingInv = false;
     }

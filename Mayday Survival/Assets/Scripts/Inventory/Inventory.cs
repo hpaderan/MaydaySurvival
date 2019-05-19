@@ -25,24 +25,25 @@ public class Inventory : MonoBehaviour
     public OnItemChange OnItemChangeCallBack;
     //default space for the inventory
     public int space = 10;
+    //Selected item in inventory
+    public int selectedItem = 0;
     //Item list
     public List<Item> items = new List<Item>();
 
     //add items into the inventory
-    public bool Add (Item item)
+    public bool Add(Item item)
     {
-        
-            if (items.Count >= space)
-            {
-                Debug.Log("Not enough room for inventory");
-                return false;
-            }
-            items.Add(item);
-            //when the event is triggered this will update the UI
-            if (OnItemChangeCallBack != null)
-            {
-                OnItemChangeCallBack.Invoke();
-            }
+        if (items.Count >= space)
+        {
+            Debug.Log("Not enough room for inventory");
+            return false;
+        }
+        items.Add(item);
+        //when the event is triggered this will update the UI
+        if (OnItemChangeCallBack != null)
+        {
+            OnItemChangeCallBack.Invoke();
+        }
         return true;
     }
 
@@ -50,6 +51,7 @@ public class Inventory : MonoBehaviour
     public void Remove(Item item)
     {
         items.Remove(item);
+        item.DropItem();
 
         if (OnItemChangeCallBack != null)
         {

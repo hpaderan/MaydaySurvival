@@ -7,6 +7,7 @@ public class InventorySlot : MonoBehaviour
 {
     public Image icon;
     public Image pointer;
+    public Image selected;
     Item item;
     public Button removeButton;
 
@@ -24,11 +25,12 @@ public class InventorySlot : MonoBehaviour
     public void ClearSlot()
     {
         item = null;
+        pointer.enabled = false;
+        selected.enabled = false;
         icon.sprite = null;
         icon.enabled = false;
         removeButton.interactable = false;
     }
-
 
     public void OnRemoveButton()
     {
