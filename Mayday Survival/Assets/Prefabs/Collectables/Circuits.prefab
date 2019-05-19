@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3861959886936772132}
   - component: {fileID: 5243164894498632722}
   - component: {fileID: 2017612471592306923}
+  - component: {fileID: 4961004031622286096}
   m_Layer: 0
   m_Name: Circuits
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4961004031622286096
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271106405199150135}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 146.4, y: 31.9, z: 115.46288}
+  m_Center: {x: 172.99266, y: -23.294075, z: 33.710476}

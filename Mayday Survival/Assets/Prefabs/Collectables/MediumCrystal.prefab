@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3571222800629800084}
   - component: {fileID: 5536206558249068194}
   - component: {fileID: 2299096281703012955}
+  - component: {fileID: 5764180233926507182}
   m_Layer: 0
   m_Name: MediumCrystal
   m_TagString: Untagged
@@ -77,3 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &5764180233926507182
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564306680486456967}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 51.7
+  m_Height: 206.6
+  m_Direction: 1
+  m_Center: {x: -0.0000038146973, y: 26.883045, z: -0.0000019073486}
