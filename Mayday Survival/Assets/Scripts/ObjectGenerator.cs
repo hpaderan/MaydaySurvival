@@ -34,39 +34,30 @@ public class ObjectGenerator : MonoBehaviour
     {
         int count = ObjectNum;
         //loop for each tile in the map
-        Debug.Log(groundScript.MapSize);
-        //for(int i = 0; i < groundScript.MapSize; i++)
-        
-            //for(int j = 0; j < groundScript.MapSize; j++)
-            
-                //Debug.Log("i is "+i+"j is "+j);
-                Vector3 newranpos = RandomPos(i, j);
-                //for (int k = 0; k < ObjectNum; k++)
-                  //check if it collides with other object
-                    //if yes then regenerate a position
-                    Debug.Log("i and j are"+i+","+j);
-                    newranpos = RandomPos(i, j);
-                    while (CheckCollide(newranpos))
-                    {
-                        //Debug.Log("regenerate vector3");
-                        newranpos = RandomPos(i, j);
-                    }
-                    //if not then generate this item
-                    //Debug.Log("the position is "+newranpos.x+" "+ newranpos.y+" "+ newranpos.z);
-                    Debug.Log("The newpos is " + newranpos);
-                    SetOneObject(objectArray, newranpos);
-                    //loop until the number is 0 in that tile
-                
-                //SetOneObject(objectArray, newranpos);
-            
-        
+        Debug.Log(groundScript.MapSize); 
+
+        //Debug.Log("i is "+i+"j is "+j);
+        Vector3 newranpos = RandomPos(i, j);
+        //check if it collides with other object
+        //if yes then regenerate a position
+        Debug.Log("i and j are"+i+","+j);
+        newranpos = RandomPos(i, j);
+        while (CheckCollide(newranpos))
+        {
+            //Debug.Log("regenerate vector3");
+            newranpos = RandomPos(i, j);
+        }
+        //if not then generate this item
+        //Debug.Log("the position is "+newranpos.x+" "+ newranpos.y+" "+ newranpos.z);
+        Debug.Log("The newpos is " + newranpos);
+        SetOneObject(objectArray, newranpos);      
 
     }
     //generate inside one tile
     Vector3 RandomPos(int x, int y)
     {
-        float x_pos = Random.Range((x * 680) - 340 + 30, (x * 680) + 340 - 30);
-        float z_pos = Random.Range((y * 680) - 340 + 30, (y * 680) + 340 - 30);
+        float x_pos = Random.Range((x * 680) - 350 + 30, (x * 680) + 350 - 30);
+        float z_pos = Random.Range((y * 680) - 350 + 30, (y * 680) + 350 - 30);
         Vector3 randompostion = new Vector3(x_pos, 0f, z_pos);
         //Debug.Log("the position is " + x_pos +","+ "0f,"+z_pos);
         return randompostion;
@@ -81,7 +72,10 @@ public class ObjectGenerator : MonoBehaviour
         newpos.y = objChoose.transform.position.y;
         //objChoose.transform.position = newpos;
         Debug.Log("Instantiating");
-        Instantiate(objChoose, newpos, objChoose.transform.rotation);
+        transform.rotation = Quaternion.AngleAxis(Random.Range(0, 180), Vector3.up);
+//        Instantiate(objChoose, newpos, objChoose.transform.rotation);
+        Instantiate(objChoose, newpos, transform.rotation);
+
         Debug.Log("Instantiate at"+ newpos);
         groundScript.UsedSpace.Add(newpos);
     }
@@ -92,10 +86,10 @@ public class ObjectGenerator : MonoBehaviour
     {
         for (int i = 0; i < groundScript.UsedSpace.Count; i++)
         {
-            if (currentpos.x >= (groundScript.UsedSpace[i].x-25) && 
-                currentpos.x <= (groundScript.UsedSpace[i].x + 25) &&
-                currentpos.z >= (groundScript.UsedSpace[i].z - 25) &&
-                currentpos.z <= (groundScript.UsedSpace[i].z + 25))
+            if ((currentpos.x >= (groundScript.UsedSpace[i].x-50) && 
+                currentpos.x <= (groundScript.UsedSpace[i].x + 50)) &&
+                (currentpos.z >= (groundScript.UsedSpace[i].z - 50) &&
+                currentpos.z <= (groundScript.UsedSpace[i].z + 50)))
             {
                 return true;
             }
