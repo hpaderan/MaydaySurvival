@@ -42,8 +42,7 @@ public class StormMonster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //isSleeping = !cycle.isNight;
-        isSleeping = false;
+        isSleeping = !cycle.isNight;
         if ( !isSleeping )
         {
             FindTarget();
@@ -110,8 +109,8 @@ public class StormMonster : MonoBehaviour
                 speed = defaultSpeed;
             }
         }
-
-        transform.Translate(transform.forward * Time.deltaTime * speed);
+        Debug.Log(rb.velocity);
+        transform.Translate(transform.forward * Time.deltaTime * speed, Space.World);
     }
 
     private void OnDrawGizmos()
