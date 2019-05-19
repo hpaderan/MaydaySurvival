@@ -9,6 +9,7 @@ public class ItemReward : Reward
     public override void Activate()
     {
         base.Activate();
-        Inventory.instance.Add(item);
+        GameObject go = Instantiate(item.gameObject);
+        //Inventory.instance.Add();
     }
 }

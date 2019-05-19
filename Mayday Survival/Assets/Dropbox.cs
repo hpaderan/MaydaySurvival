@@ -5,30 +5,27 @@ using UnityEngine;
 public class Dropbox : MonoBehaviour
 {
     private EventManager em;
+    public List<Item> items;
     private void Start()
     {
         em = EventManager.instance;
     }
-    public bool DepositItem(Item item)
+    public void DepositItem(Item item)
     {
-        bool deposited = false;
-        for (int i = 0; i < em.activeEvents.Count; i++)
+        items.Add(item);
+        Inventory.instance.Remove(item);
+        item.gameObject.SetActive(false);
+    }
+    public int GetItemNum(Item item)
+    {
+        int x = 0;
+        for (int i = 0; i < items.Count; i++)
         {
-            if ((Mission)em.activeEvents[i].aEvent != null)
+            if (items[i].ItemName == item.ItemName)
             {
-                Mission m = (Mission)em.activeEvents[i].aEvent;
-                for (int j = 0; j < m.requirments.Count; j++)
-                {
-                    if(m.requirments[i].item == item)
-                    {
-                        m.requirments[i].number++;
-                        Inventory.instance.Remove(item);
-                        deposited = true;
-                    }
-                }
+                x++;
             }
         }
-
-        return deposited;
+        return x;
     }
 }

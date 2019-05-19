@@ -104,38 +104,42 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void Use()
+    IEnumerator Use()
     {
         //  if ( obj.GetComponent<scriptHere>().toolRequirement == currentTool.GetName() )
         //      obj.GetComponent<scriptHere>().Use();
         float dst = float.MaxValue;
+        List<GameObject> goList = toolUseDetector.FindInteractables(pickUpRange);
         GameObject g = null;
-        foreach (GameObject obj in toolUseDetector.FindInteractables(pickUpRange))
+        if (goList.Count > 0 && Inventory.instance.items.Count > 0)
         {
-            float objDst = Vector3.Distance(obj.transform.position, transform.position);
-            if (objDst < dst)
+            foreach (GameObject obj in goList)
             {
-                dst = objDst;
-                g = obj;
+                float objDst = Vector3.Distance(obj.transform.position, transform.position);
+                if (objDst < dst)
+                {
+                    dst = objDst;
+                    g = obj;
+                }
+            }
+            if (g.GetComponent<Dropbox>() != null)
+            {
+                g.GetComponent<Dropbox>().DepositItem(inventory.items[inventory.selectedItem]);
+            }
+            else if (g.GetComponent<BuiltStructure>() != null)
+            {
+                if ((Crystal)currentTool != null)
+                {
+                    g.GetComponent<BuiltStructure>().Recharge((Crystal)currentTool);
+                }
+
+            }
+            else if (g.GetComponent<GatherNode>() != null)
+            {
+                g.GetComponent<GatherNode>().Damage(Random.Range(1f, 5f), currentTool);
             }
         }
-        if(g.GetComponent<Dropbox>() != null)
-        {
-            g.GetComponent<Dropbox>().DepositItem(inventory.items[inventory.selectedItem]);
-        }
-        else if (g.GetComponent<BuiltStructure>() != null)
-        {
-            if ((Crystal)currentTool != null)
-            {
-                g.GetComponent<BuiltStructure>().Recharge((Crystal)currentTool);
-            }
-
-        }
-        else if (g.GetComponent<GatherNode>() != null)
-        {
-            g.GetComponent<GatherNode>().Damage(Random.Range(1f, 5f), currentTool);
-        }
-
+        yield return new WaitForSeconds(0.8f);
     }
 
     IEnumerator PickUp()

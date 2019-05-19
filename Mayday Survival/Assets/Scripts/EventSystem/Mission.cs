@@ -7,10 +7,33 @@ public class Mission : Event
 {
     public string title = "Get the Stuff";
     public List<Requirment> requirments = new List<Requirment>();
-    public List<Reward> rewards;
-    public override bool TryEvent()
+    public List<ItemReward> iRewards;
+    public List<BuildReward> bRewards;
+    public List<DeckReward> dRewards;
+    public bool TryEvent()
     {
-        return base.TryEvent();
+        if (EventManager.instance.CheckEvent(this))
+        {
+            if (canPlay)
+            {
+                if (Random.Range(1, 101) <= chance)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
     public override void PlayEvent()
     {
@@ -20,11 +43,21 @@ public class Mission : Event
     public override void FinishEvent()
     {
         Debug.Log("Mission Complete");
-        for (int i = 0; i < rewards.Count; i++)
+
+        for (int i = 0; i < iRewards.Count; i++)
         {
-            rewards[i].Activate();
-            EventManager.instance.FinishEvent(this);
+            iRewards[i].Activate();
         }
+        for (int i = 0; i < bRewards.Count; i++)
+        {
+            bRewards[i].Activate();
+        }
+        for (int i = 0; i < dRewards.Count; i++)
+        {
+            dRewards[i].Activate();
+        }
+        EventManager.instance.FinishEvent(this);
+
     }
     public override void UpdateEvent()
     {
@@ -32,13 +65,14 @@ public class Mission : Event
         int completed = 0;
         for (int i = 0; i < requirments.Count; i++)
         {
-            if(requirments[i].number >= requirments[i].numberNeeded)
+            requirments[i].number = EventManager.instance.GetComponent<Dropbox>().GetItemNum(requirments[i].item);
+            if (requirments[i].number >= requirments[i].numberNeeded)
             {
                 completed++;
             }
         }
 
-        if(completed == requirments.Count)
+        if (completed == requirments.Count)
         {
             FinishEvent();
         }

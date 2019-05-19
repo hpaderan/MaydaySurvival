@@ -16,32 +16,6 @@ public class Event
     {
 
     }
-    public virtual bool TryEvent()
-    {
-        if(EventManager.instance.CheckEvent(this))
-        {
-            if (canPlay)
-            {
-                if (Random.Range(1, 101) <= chance)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-        
-    }
     public virtual void PlayEvent()
     {
         if(oneUse)
@@ -52,6 +26,6 @@ public class Event
     public virtual void FinishEvent()
     {
         Debug.Log("Finishing Event");
-        EventManager.instance.FinishEvent(this);
+        //EventManager.instance.FinishEvent(this);
     }
 }

@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[System.Serializable]
-public class ActiveEvent
-{
-    public Event aEvent;
-    public float timeStamp;
-}
+
+
+
 public class EventManager : MonoBehaviour
 {
     #region singleton
@@ -24,18 +21,19 @@ public class EventManager : MonoBehaviour
     #endregion
 
     public int activeNum = 3;
-    public List<Event> allEvents;
-    public List<Event> finishedEvents;
+    public List<Mission> allMissions;
+    public List<Disaster> allDisasters;
+
+    public List<Mission> finishedEvents;
 
     public List<BuildReward> rewards;
-
-
-
-    public List<ActiveEvent> activeEvents;
+    public List<Mission> activeMissions;
 
     public float eventWait = 10f;
     private void Start()
     {
+        activeMissions = new List<Mission>();
+
         foreach (EventDeck d in startingDecks)
         {
             AddDeck(d);
@@ -49,13 +47,13 @@ public class EventManager : MonoBehaviour
     }
     private void UpdateActive()
     {
-        if (activeEvents != null)
+        if (activeMissions != null)
         {
-            for (int i = 0; i < activeEvents.Count; i++)
+            for (int i = 0; i < activeMissions.Count; i++)
             {
-                if (activeEvents[i].aEvent != null)
+                if (activeMissions[i] != null)
                 {
-                    activeEvents[i].aEvent.UpdateEvent();
+                    activeMissions[i].UpdateEvent();
                 }
             }
         }
@@ -90,9 +88,9 @@ public class EventManager : MonoBehaviour
             if ((Mission)finishedEvents[i] != null)
             {
                 Mission m = (Mission)finishedEvents[i];
-                for (int j = 0; j < m.rewards.Count; j++)
+                for (int j = 0; j < m.bRewards.Count; j++)
                 {
-                    if (m.rewards[j] == br)
+                    if (m.bRewards[j] == br)
                     {
                         finishedEvents[i].canPlay = true;
                     }
@@ -114,15 +112,14 @@ public class EventManager : MonoBehaviour
     /// Finish an Event, either by a disaster timing out or a mission being complete
     /// </summary>
     /// <param name="e">The event that finished</param>
-    public void FinishEvent(Event e)
+    public void FinishEvent(Mission e)
     {
-        for (int i = 0; i < activeEvents.Count; i++)
+        for (int i = 0; i < activeMissions.Count; i++)
         {
-            if (activeEvents[i].aEvent == e)
+            if (activeMissions[i] == e)
             {
                 if (e.oneUse) { finishedEvents.Add(e); }
-                activeEvents[i].aEvent = null;
-                activeEvents[i].timeStamp = Time.time;
+                activeMissions[i] = null;
             }
         }
     }
@@ -131,14 +128,14 @@ public class EventManager : MonoBehaviour
     /// </summary>
     /// <param name="e"></param>
     /// <returns></returns>
-    public bool CheckEvent(Event e)
+    public bool CheckEvent(Mission e)
     {
         bool notFoundEvent = true;
-        if (activeEvents != null)
+        if (activeMissions != null)
         {
-            for (int i = 0; i < activeEvents.Count; i++)
+            for (int i = 0; i < activeMissions.Count; i++)
             {
-                if (activeEvents[i].aEvent == e)
+                if (activeMissions[i] == e)
                 {
                     notFoundEvent = false;
                 }
@@ -150,17 +147,17 @@ public class EventManager : MonoBehaviour
     /// Draw a new event from the list to become and active event
     /// </summary>
     /// <returns>The new event becoming active</returns>
-    private Event DrawNewEvent()
+    private Mission DrawNewEvent()
     {
-        Event e = null;
-        if (allEvents.Count > 0)
+        Mission e = null;
+        if (allMissions.Count > 0)
         {
             do
             {
-                int i = Random.Range(0, allEvents.Count);
-                if (allEvents[i].TryEvent())
+                int i = Random.Range(0, allMissions.Count -1);
+                if (allMissions[i].TryEvent())
                 {
-                    e = allEvents[i];
+                    e = allMissions[i];
                 }
             } while (e == null);
         }
@@ -175,40 +172,15 @@ public class EventManager : MonoBehaviour
     /// </summary>
     private void CheckDeck()
     {
-        //Check if no active events
-        if (allEvents != null)
+        if (activeMissions.Count == 0)
         {
-            if (allEvents.Count > 0)
-            {
-                do
-                {
-                    int i = Random.Range(0, allEvents.Count);
-                    if (allEvents[i].TryEvent())
-                    {
-                        ActiveEvent newE = new ActiveEvent
-                        {
-                            aEvent = allEvents[i],
-                            timeStamp = Time.time
-                        };
-
-                        activeEvents.Add(newE);
-                    }
-                }
-                while (activeEvents.Count < 1);
-            }
+            activeMissions.Add(DrawNewEvent());
         }
-        //Check for timed out active events
-        if (activeEvents != null)
+        else if (finishedEvents.Count > 0)
         {
-            if (activeEvents.Count > 0)
+            if (activeMissions.Count < activeNum)
             {
-                for (int i = 0; i < activeEvents.Count; i++)
-                {
-                    if (Time.time - activeEvents[i].timeStamp >= eventWait && activeEvents[i].aEvent == null)
-                    {
-                        activeEvents[i] = new ActiveEvent { aEvent = DrawNewEvent() };
-                    }
-                }
+                activeMissions.Add(DrawNewEvent());
             }
         }
     }
@@ -220,15 +192,11 @@ public class EventManager : MonoBehaviour
     {
         for (int i = 0; i < deck.missions.Count; i++)
         {
-            deck.events.Add(deck.missions[i]);
+            allMissions.Add(deck.missions[i]);
         }
         for (int i = 0; i < deck.disaster.Count; i++)
         {
-            deck.events.Add(deck.disaster[i]);
-        }
-        foreach (Event e in deck.events)
-        {
-            allEvents.Add(e);
+            allDisasters.Add(deck.disaster[i]);
         }
     }
     /// <summary>
@@ -237,9 +205,13 @@ public class EventManager : MonoBehaviour
     /// <param name="deck">The deck being removed</param>
     public void RemoveDeck(EventDeck deck)
     {
-        foreach (Event e in deck.events)
+        foreach (Mission e in deck.missions)
         {
-            allEvents.Remove(e);
+            allMissions.Remove(e);
+        }
+        foreach (Disaster d in deck.disaster)
+        {
+            allDisasters.Remove(d);
         }
     }
 }

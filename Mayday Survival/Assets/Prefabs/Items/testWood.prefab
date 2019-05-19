@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2053084191355987875}
   - component: {fileID: 2053084191355987876}
   - component: {fileID: 2053084191355987877}
-  - component: {fileID: -3495502644163598041}
   m_Layer: 0
   m_Name: testWood
   m_TagString: Pickup
@@ -124,17 +123,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Wood
   icon: {fileID: 21300000, guid: 48f40f415b358824fa23d3eb92ac0792, type: 3}
---- !u!114 &-3495502644163598041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2053084191355987878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 773277b3fc3b99f478443ef33bd7bed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isActive: 0
-  item: {fileID: 2053084191355987877}

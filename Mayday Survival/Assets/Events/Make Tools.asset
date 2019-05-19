@@ -19,17 +19,15 @@ MonoBehaviour:
     oneUse: 1
     title: Make Grass
     requirments:
-    - number: 0
+    - number: 5
       numberNeeded: 3
       item: {fileID: 2053084191355987877, guid: 9a544fa18f51e244f83ad3ea6aadb362,
         type: 3}
-    - number: 0
+    - number: 1
       numberNeeded: 1
       item: {fileID: 225272531436524804, guid: 5d3b5638fceda60488a67c4876969e49, type: 3}
-    rewards:
-    - {fileID: -3495502644163598041, guid: 9a544fa18f51e244f83ad3ea6aadb362, type: 3}
+    iRewards:
+    - {fileID: 914713499338838456, guid: 1389d37dcd6d2e449b97bbc3540302e0, type: 3}
+    bRewards: []
+    dRewards: []
   disaster: []
-  events:
-  - chance: 100
-    canPlay: 1
-    oneUse: 1

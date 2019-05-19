@@ -16,11 +16,10 @@ public class EventDeck : ScriptableObject
     public List<Mission> missions;
     [SerializeField]
     public List<Disaster> disaster;
-    [HideInInspector]
-    public List<Event> events;
 
-    public void RemoveEvent(Event e)
+    public void RemoveMission(Mission m)
     {
-        if (events.Contains(e)) { events.Remove(e); }
+        if (missions.Contains(m)) { missions.Remove(m); }
     }
+
 }
