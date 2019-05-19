@@ -36,8 +36,11 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody rbody;
     //inventory
     private Inventory inventory;
+    private Animator Anim;
+
     void Start()
     {
+        Anim = GetComponent<Animator>();
         inventory = Inventory.instance;
         rbody = GetComponent<Rigidbody>();
         isMoveLocked = false;
@@ -69,6 +72,15 @@ public class PlayerScript : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
+        if(v != 0 || h!= 0)
+        {
+            Anim.SetFloat("RunVal", 1);
+        }
+        else
+        {
+            Anim.SetFloat("RunVal", 0);
+        }
+
         moveVals.Set(h, 0f, v);
 
         // Action inputs
@@ -77,6 +89,7 @@ public class PlayerScript : MonoBehaviour
             // do action here
             Debug.Log("Picking up...");
             StartCoroutine("PickUp");
+            Anim.SetTrigger("PutDown");
         }
 
         if (Input.GetAxis("Use") > 0.8 && !isUsingTool)
@@ -86,8 +99,7 @@ public class PlayerScript : MonoBehaviour
             isMoveLocked = true;
             if (currentTool != null) { }
             StartCoroutine("Use");
-
-
+            Anim.SetTrigger("PickUp");
         }
         else { isMoveLocked = false; }
 
@@ -96,6 +108,7 @@ public class PlayerScript : MonoBehaviour
             // do action here
             Debug.Log("Dropping...");
             StartCoroutine("Drop");
+            Anim.SetTrigger("PutDown");
         }
 
         if (Input.GetAxis("CycleInv") != 0 && !isCyclingInv)
